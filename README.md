@@ -1,5 +1,5 @@
 ## To install FrontEnd dependencies 
 composer update
 ## To install BackEnd dependencies 
-npm isntall
+npm install
 
