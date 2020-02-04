@@ -65,13 +65,12 @@
                     // console.log(this.posts);
                     // console.log(id,index);
                     // this.posts = this.posts.slice();
-                    location.reload();
+                    // location.reload();
                     // this.posts = this.posts.filter((e)=>e.id !== id )
                     // this.$delete(this.posts, index)
-                    // this.posts.splice(this.posts.indexOf(id), 1);
+                    this.posts.splice(this.posts.indexOf(id), 1);
                     console.log(this.posts);
                 });
-
             }
         }
     }
