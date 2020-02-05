@@ -5,16 +5,18 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Post Title:</label>
+                        <label>Post Title:
                         <input type="text" class="form-control" v-model="post.title">
+                        </label>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Post Body:</label>
+                        <label>Post Body:
                         <textarea class="form-control" v-model="post.body" rows="5"></textarea>
+                        </label>
                     </div>
                 </div>
             </div><br />

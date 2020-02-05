@@ -1,5 +1,6 @@
 <template>
     <div>
+
         <h1>Posts</h1>
         <div class="row">
             <div class="col-md-10"></div>
@@ -13,22 +14,24 @@
             <thead>
             <tr>
                 <th>ID</th>
-                <th>Item Name</th>
-                <th>Item Price</th>
+                <th>Title</th>
+                <th>Body</th>
+                <th>Created At</th>
+                <th>Updated At</th>
                 <th>Actions</th>
             </tr>
             </thead>
             <tbody>
-            <tr :key="post.id" v-for="(post,index) in posts">
+            <tr :key="post.id" v-for="post in posts">
                 <td>{{ post.id }}</td>
                 <td>{{ post.title }}</td>
                 <td>{{ post.body }}</td>
+                <td>{{ post.created_at }}</td>
+                <td>{{ post.updated_at }}</td>
                 <td>
                     <router-link :to="{name: 'edit', params: { id: post.id }}" class="btn btn-primary">Edit
                     </router-link>
-                </td>
-                <td>
-                    <button @click.prevent="deletePost(post.id,index)" class="btn btn-danger">Delete</button>
+                    <button @click.prevent="deletePost(post.id)" class="btn btn-danger">Delete</button>
                 </td>
             </tr>
             </tbody>
@@ -54,21 +57,26 @@
                 }
             }).then(response => {
                 this.posts = response.data.data;
+                console.log(this.posts);
             });
         },
         methods: {
-            deletePost(id, index) {
-                console.log(id, index);
+            deletePost(id) {
                 let uri = `http://localhost:8000/api/post/delete/${id}`;
+                // Loop because multi dimensial array
+                for (var i = 0; i < this.posts.length; i++) {
+                    if (this.posts[i].id === id) {
+                        console.log('i=' + i);
+                        break;
+                    }
+                }
                 this.axios.delete(uri).then(response => {
-                    // this.$forceUpdate();
-                    // console.log(this.posts);
-                    // console.log(id,index);
-                    // this.posts = this.posts.slice();
-                    // location.reload();
-                    // this.posts = this.posts.filter((e)=>e.id !== id )
-                    // this.$delete(this.posts, index)
-                    this.posts.splice(this.posts.indexOf(id), 1);
+                    // this.$forceUpdate(); > Not a good solution
+                    // location.reload(); >>> Not a good solution
+                    // this.posts = this.posts.filter((e)=>e.id !== id ) > Not working
+                    // this.$delete(this.posts, index) > Not working
+                    // console.log(this.posts.indexOf(id)); > -1
+                    this.posts.splice(i, 1);
                     console.log(this.posts);
                 });
             }

@@ -12,7 +12,9 @@ public function store(Request $request)
     {
       $post = new Post([
         'title' => $request->get('title'),
-        'body' => $request->get('body')
+        'body' => $request->get('body'),
+        'created_at' => $request->get('created_at'),
+        'updated_at' => $request->get('updated_at')
       ]);
 
       $post->save();
