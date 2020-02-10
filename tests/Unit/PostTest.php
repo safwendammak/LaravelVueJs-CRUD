@@ -39,12 +39,20 @@ class PostTest extends TestCase
 
     public function testDeletePost()
     {
-        $response = $this->deleteJson('api/post/delete/4');
+        $response = $this->deleteJson('api/post/delete/13');
         $response
             ->assertStatus(200)
             ->assertExactJson([
                 'successfully deleted'
             ]);
+    }
+
+    public function testFetchSinglePost()
+    {
+        $response = $this->json('GET', 'api/post/edit/14');
+        $response
+            ->assertStatus(200)
+            ->assertSee('id')->assertSee('title')->assertSee('body');
     }
 
 }
